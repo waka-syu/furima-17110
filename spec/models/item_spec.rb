@@ -38,7 +38,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'state_idの値が１では登録できない' do
-        @item.state_id = "1"
+        @item.state_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("State must be other than 1")
       end
@@ -50,7 +50,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'category_idの値が１では登録できない' do
-        @item.category_id = "1"
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
@@ -62,7 +62,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'fee_idの値が１では登録できない' do
-        @item.fee_id = "1"
+        @item.fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Fee must be other than 1")
       end
@@ -74,7 +74,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'prefecture_idの値が１では登録できない' do
-        @item.prefecture_id = "1"
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
@@ -85,7 +85,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Delivery date can't be blank", "Delivery date is not a number")
       end
       it 'delivery_date_idの値が１では登録できない' do
-        @item.delivery_date_id = "1"
+        @item.delivery_date_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery date must be other than 1")
       end
@@ -97,13 +97,13 @@ RSpec.describe Item, type: :model do
       end
 
       it 'valueの値が300より小さいと登録できない' do
-        @item.value = "299"
+        @item.value = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Value must be greater than or equal to 300")
       end
 
       it 'valueの値が9,999,999より大きいと登録できない' do
-        @item.value = "10000000"
+        @item.value = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Value must be less than or equal to 9999999")
       end
