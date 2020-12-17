@@ -12,9 +12,12 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :text
-    validates :value
+    validates :image
   end
-  
+
+  validates :value, presence: true,  numericality: { greater_then_or_equal_to: 300, less_then_or_equal_to: 9_999_999 },
+                    format: { with: /\A[0-9]+\z/ }
+
   with_options presence: true, numericality: { other_then: 1 } do
     validates :state_id
     validates :category_id
