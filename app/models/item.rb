@@ -15,10 +15,10 @@ class Item < ApplicationRecord
     validates :image
   end
 
-  validates :value, presence: true,  numericality: { greater_then_or_equal_to: 300, less_then_or_equal_to: 9_999_999 },
+  validates :value, presence: true,  numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                     format: { with: /\A[0-9]+\z/ }
 
-  with_options presence: true, numericality: { other_then: 1 } do
+  with_options presence: true, numericality: { other_than: 1 } do
     validates :state_id
     validates :category_id
     validates :fee_id
