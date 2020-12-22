@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
+  before_action :set_item, only: [:index, :create]
   def index
     @user_purchase = UserPurchase.new
-    @item = Item.find(params[:item_id])
   end
 
   def create
@@ -10,8 +10,12 @@ class PurchasesController < ApplicationController
       @user_purchase.save
       redirect_to root_path
     else
-      render action: :index
+      render :index
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   private
