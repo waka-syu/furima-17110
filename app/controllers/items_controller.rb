@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
+    @purchases = Purchase.includes(:item)
   end
 
   def new
@@ -20,11 +21,15 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @purchase = Purchase.find_by(item_id: params[:id])
   end
 
   def edit
-    unless current_user.id == @item.user.id
+    @purchase = Purchase.find_by(item_id: @item.id)
+    if current_user.id != @item.user.id
       redirect_to action: :index
+    elsif @purchase.present?
+      redirect_to root_path
     end
   end
 
@@ -43,11 +48,13 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+
+
+  private
+
   def set_item
     @item = Item.find(params[:id])
   end
-
-  private
 
   def item_params
     params.require(:item).permit(:image, :name, :text, :category_id, :state_id, :fee_id, :prefecture_id, :delivery_date_id, :value).merge(user_id: current_user.id)
