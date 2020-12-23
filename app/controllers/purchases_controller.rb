@@ -2,6 +2,12 @@ class PurchasesController < ApplicationController
   before_action :set_item, only: [:index, :create]
   def index
     @user_purchase = UserPurchase.new
+    @purchase = Purchase.find_by(item_id: @item.id)
+    if @purchase.present?
+      redirect_to root_path
+    elsif current_user.id == @item.user.id
+      redirect_to root_path
+    end
   end
 
   def create
