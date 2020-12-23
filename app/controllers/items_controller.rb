@@ -45,12 +45,13 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
 
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :text, :category_id, :state_id, :fee_id, :prefecture_id, :delivery_date_id, :value).merge(user_id: current_user.id)
