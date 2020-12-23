@@ -1,5 +1,7 @@
 class PurchasesController < ApplicationController
+  before_action :authenticate_user!, only: :index
   before_action :set_item, only: [:index, :create]
+
   def index
     @user_purchase = UserPurchase.new
     @purchase = Purchase.find_by(item_id: @item.id)
