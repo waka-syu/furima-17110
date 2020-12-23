@@ -9,12 +9,10 @@
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
 
-      <% @purchases.each do |purchase| %>
-        <% if @item.id == purchase.item.id %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
-        <% end %>
+      <% if (@purchase.present?) && (@item.id == @purchase.item_id) %>
+        <div class='sold-out'>
+          <span>Sold Out!!</span>
+        </div>
       <% end %>
     </div>
 
@@ -26,8 +24,8 @@
         <%= @item.fee.name %>
       </span>
     </div>
-    <% @purchases.each do |purchase| %>
-    <% unless @item.id == purchase.item.id %>
+
+    <% unless (@purchase.present?) && (@item.id == @purchase.item_id) %>
       <% if user_signed_in? %>
         <% if current_user.id == @item.user.id %>
           <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
@@ -37,7 +35,6 @@
           <%= link_to '購入画面に進む', item_purchases_path(@item.id),class:"item-red-btn"%>
         <% end %>
       <% end %>
-    <% end %>
     <% end %>
 
     <div class="item-explain-box">

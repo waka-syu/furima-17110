@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :set_purchases, only: [:index, :show]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
+    @purchases = Purchase.includes(:item)
   end
 
   def new
@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @purchase = Purchase.find_by(item_id: params[:id])
   end
 
   def edit
@@ -48,9 +49,6 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def set_purchases
-    @purchases = Purchase.includes(:item)
-  end
 
   private
 
