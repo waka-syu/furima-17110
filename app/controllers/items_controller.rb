@@ -25,8 +25,11 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user.id
+    @purchase = Purchase.find_by(item_id: @item.id)
+    if current_user.id != @item.user.id
       redirect_to action: :index
+    elsif @purchase.present?
+      redirect_to root_path
     end
   end
 
