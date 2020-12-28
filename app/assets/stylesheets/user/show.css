@@ -42,3 +42,10 @@
   padding: 1vw;
   background-color: #FFF;
 }
+
+.user-item-title {
+  text-align: center;
+  font-size: 5vh;
+  font-weight: bold;
+  margin-bottom: 5vh;
+}

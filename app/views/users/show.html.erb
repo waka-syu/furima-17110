@@ -23,6 +23,9 @@
       </tbody>
     </table>
 
+    <h2 class="user-item-title">
+      <%= @user.nickname%>さんの出品一覧
+    </h2>
     <ul class='user-item-lists'>
       <% @items.each do |item| %>
       <li class='list'>
