@@ -1,0 +1,63 @@
+<%= render "shared/header" %>
+
+<%# ユーザー情報 %>
+<div class="user-show">
+  <h2 class="user-title">
+    <%= @user.nickname%>さんのマイページ
+  </h2>
+  <div class="user-box">
+    <table class="user-table">
+      <tbody>
+        <tr>
+          <th class="detail-user">ニックネーム</th>
+          <td class="detail-user-value"><%= @user.nickname %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">フルネーム</th>
+          <td class="detail-user-value"><%= @user.last_name + @user.first_name %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">フルネーム(カナ)</th>
+          <td class="detail-user-value"><%= @user.last_kana + @user.first_kana %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ul class='user-item-lists'>
+      <% @items.each do |item| %>
+      <li class='list'>
+        <%= link_to item_path(item.id) do %>
+        <div class='item-img-content'>
+          <%= image_tag item.image, class: "item-img" %>
+          <%# 商品が売れていればsold outを表示 %>
+          <% @purchases.each do |purchase| %>
+            <% if item.id == purchase.item.id %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+            <% end %>
+          <% end %>
+          <%# //商品が売れていればsold outを表示 %>
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= item.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= item.value %>円<br><%= item.fee.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%# /ユーザーの概要 %>
+
+
+<%= render "shared/footer" %>
