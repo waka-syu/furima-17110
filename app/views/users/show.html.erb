@@ -1,11 +1,11 @@
 <%= render "shared/header" %>
 
 <%# ユーザー情報 %>
-<div class="user-show">
+
+<div class="user-box">
   <h2 class="user-title">
     <%= @user.nickname%>さんのマイページ
   </h2>
-  <div class="user-box">
     <table class="user-table">
       <tbody>
         <tr>
@@ -23,6 +23,14 @@
       </tbody>
     </table>
 
+    <% if user_signed_in? && (current_user.id == @user.id) %>
+      <% if @profile.empty? %>
+        <%= link_to 'プロフィールの作成', new_user_profile_path(@user.id), class: "profile-red-btn" %>
+      <% else %>
+        <%= link_to 'プロフィールの編集', edit_user_profile_path(@user.id),method: :get, class:"profile-red-btn"%>
+      <% end %>
+    <% end %>
+    <%# ユーザーの出品一覧%>
     <h2 class="user-item-title">
       <%= @user.nickname%>さんの出品一覧
     </h2>
@@ -32,6 +40,7 @@
         <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
+
           <%# 商品が売れていればsold outを表示 %>
           <% @purchases.each do |purchase| %>
             <% if item.id == purchase.item.id %>
@@ -41,6 +50,7 @@
             <% end %>
           <% end %>
           <%# //商品が売れていればsold outを表示 %>
+
         </div>
         <div class='item-info'>
           <h3 class='item-name'>
@@ -58,7 +68,34 @@
       </li>
       <% end %>
     </ul>
-  </div>
+    <%# /ユーザーの出品一覧 %>
+
+    <%# ユーザーの購入履歴 %>
+    <% if current_user.id == @user.id %>
+      <h2 class="user-purchases-title">
+        <%= @user.nickname%>さんの購入履歴
+      </h2>
+      <ul class='user-purchase-lists'>
+      <% @purchases.each do |purchase|%>
+        <% if @user.id == purchase.user.id %>
+          <li class='list'>
+            <div class='purchase'>
+              <%= image_tag purchase.item.image, class: "item-img" %>
+              <div class='item-info'>
+                <h3 class='item-name'>
+                  <%= purchase.item.name %>
+                </h3>
+                <div class='item-price'>
+                  <%= purchase.item.value %>円<br><%= purchase.item.fee.name %>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      <% end %>
+      </ul>
+    <% end %>
+    <%# /ユーザーの購入履歴 %>
 </div>
 <%# /ユーザーの概要 %>
 
