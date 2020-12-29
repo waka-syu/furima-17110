@@ -12,6 +12,7 @@
           <th class="detail-user">ニックネーム</th>
           <td class="detail-user-value"><%= @user.nickname %></td>
         </tr>
+        <% if @profile.present? %>
         <tr>
           <th class="detail-user">ユーザーメッセージ</th>
           <td class="detail-user-value"><%= @profile.status_message %></td>
@@ -24,7 +25,7 @@
           <th class="detail-user">性別</th>
           <td class="detail-user-value"><%= @profile.gender.name %></td>
         </tr>
-        <% if user_signed_in? && (current_user.id == @user.id) %>
+        <% elsif user_signed_in? && (current_user.id == @user.id) %>
         <tr>
           <th class="detail-user">フルネーム</th>
           <td class="detail-user-value"><%= @user.last_name + @user.first_name %></td>
