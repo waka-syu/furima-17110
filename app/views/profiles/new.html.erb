@@ -5,12 +5,11 @@
   </header>
   <div class="profile-main">
     <h2 class="profile-title">
-      <%= @user.nickname %>さんのユーザーの情報を入力
+      <%= @user.nickname %>さんのユーザー情報を入力
     </h2>
     <%= form_with model: @profile, url: user_profiles_path(@user.id),local: true do |f| %>
-
     <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
-
+    
     <%# ユーザーのひとこと %>
       <div class="profile-explain">
         <div class="weight-bold-text">
@@ -51,8 +50,8 @@
       <%=link_to 'もどる', user_path(@user.id), class:"back-btn" %>
     </div>
     <%# /下部ボタン %>
+    <% end %>
   </div>
-  <% end %>
 
   <footer class="profile-footer">
     <ul class="menu">

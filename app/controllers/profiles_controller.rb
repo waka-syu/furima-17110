@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     if @profile.save
-      redirect_to 
+      redirect_to user_path(@profile.user.id)
     else
       render :new
     end
