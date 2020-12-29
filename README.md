@@ -17,6 +17,7 @@
 
 - has_many :items
 - has_many :purchases
+- has_one :profile
 
 ## items テーブル
 
@@ -65,3 +66,16 @@
 ### Association
 
 - belongs_to :purchase
+
+## profiles テーブル
+
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| status_message  | text       |                                |
+| prefecture_id   | integer    | null: false                    |
+| gender_id       | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user

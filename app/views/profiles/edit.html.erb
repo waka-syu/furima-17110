@@ -1,0 +1,68 @@
+<div class="profile-contents">
+  <header class="profile-header">
+    <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
+  </header>
+  <div class="profile-main">
+    <h2 class="profile-title">
+      <%= @user.nickname %>さんのユーザー情報を入力
+    </h2>
+    <%= form_with model: @profile, url: user_profile_path(@user.id),local: true do |f| %>
+
+    <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
+
+    <%# ユーザーのひとこと %>
+      <div class="profile-explain">
+        <div class="weight-bold-text">
+          プロフィールメッセージ
+        </div>
+        <%= f.text_area :status_message, class:"message-text", id:"message-name", placeholder:"ひとこと（40文字まで)", maxlength:"40" %>
+      </div>
+    <%# /ユーザーのひとこと %>
+
+    <%# ユーザーの情報 %>
+    <div class="profile-detail">
+      <div class="weight-bold-text">ユーザー登録情報</div>
+      <div class="form">
+        <div class="weight-bold-text">
+          登録地域
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"select-box", id:"profile-prefecture"}) %>
+        <div class="weight-bold-text">
+          性別
+          <span class="indispensable">必須</span>
+        </div>
+        <%= f.collection_select(:gender_id, Gender.all, :id, :name, {}, {class:"select-box", id:"profile-gender"}) %>
+      </div>
+    </div>
+    <%# /ユーザーの情報 %>
+
+    <%# 注意書き %>
+    <div class="caution">
+      <p class="sentence">
+        ※個人情報や不快な表現等の記載はお辞め下さい。
+      </p>
+    </div>
+    <%# /注意書き %>
+    <%# 下部ボタン %>
+    <div class="profile-btn-contents">
+      <%= f.submit "変更する" ,class:"profile-btn" %>
+      <%=link_to 'もどる', user_path(@user.id), class:"back-btn" %>
+    </div>
+    <%# /下部ボタン %>
+    <% end %>
+  </div>
+
+
+  <footer class="profile-footer">
+    <ul class="menu">
+      <li><a href="#">プライバシーポリシー</a></li>
+      <li><a href="#">フリマ利用規約</a></li>
+      <li><a href="#">特定商取引に関する表記</a></li>
+    </ul>
+    <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
+    <p class="inc">
+      ©︎Furima,Inc.
+    </p>
+  </footer>
+</div>
