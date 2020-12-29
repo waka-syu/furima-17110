@@ -25,7 +25,9 @@
           <th class="detail-user">性別</th>
           <td class="detail-user-value"><%= @profile.gender.name %></td>
         </tr>
-        <% elsif user_signed_in? && (current_user.id == @user.id) %>
+        <% end %>
+        
+        <% if user_signed_in? && (current_user.id == @user.id) %>
         <tr>
           <th class="detail-user">フルネーム</th>
           <td class="detail-user-value"><%= @user.last_name + @user.first_name %></td>
