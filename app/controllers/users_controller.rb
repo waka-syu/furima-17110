@@ -3,6 +3,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @items = @user.items.order("created_at DESC")
     @purchases = Purchase.includes(:item)
-    @profile = Profile.all
+    @profile = Profile.find(@user.id)
   end
 end

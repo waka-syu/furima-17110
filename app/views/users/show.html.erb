@@ -13,6 +13,19 @@
           <td class="detail-user-value"><%= @user.nickname %></td>
         </tr>
         <tr>
+          <th class="detail-user">ユーザーメッセージ</th>
+          <td class="detail-user-value"><%= @profile.status_message %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">登録地域</th>
+          <td class="detail-user-value"><%= @profile.prefecture.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">性別</th>
+          <td class="detail-user-value"><%= @profile.gender.name %></td>
+        </tr>
+        <% if user_signed_in? && (current_user.id == @user.id) %>
+        <tr>
           <th class="detail-user">フルネーム</th>
           <td class="detail-user-value"><%= @user.last_name + @user.first_name %></td>
         </tr>
@@ -20,14 +33,15 @@
           <th class="detail-user">フルネーム(カナ)</th>
           <td class="detail-user-value"><%= @user.last_kana + @user.first_kana %></td>
         </tr>
+        <% end %>
       </tbody>
     </table>
 
     <% if user_signed_in? && (current_user.id == @user.id) %>
-      <% if @profile.empty? %>
-        <%= link_to 'プロフィールの作成', new_user_profile_path(@user.id), class: "profile-red-btn" %>
-      <% else %>
+      <% if @profile.present? %>
         <%= link_to 'プロフィールの編集', edit_user_profile_path(@user.id),method: :get, class:"profile-red-btn"%>
+      <% else %>
+        <%= link_to 'プロフィールの作成', new_user_profile_path(@user.id), class: "profile-red-btn" %>
       <% end %>
     <% end %>
     <%# ユーザーの出品一覧%>
