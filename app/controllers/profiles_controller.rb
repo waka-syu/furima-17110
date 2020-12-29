@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile, only: [:edit, :update]
-  before_action :set_user, only: [:new, :edit]
+  before_action :set_user, only: [:new, :create, :edit, :update]
 
   def new
     @profile = Profile.new
