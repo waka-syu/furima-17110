@@ -1,7 +1,6 @@
 <div class="profile-contents">
   <header class="profile-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
-
   </header>
   <div class="profile-main">
     <h2 class="profile-title">
@@ -9,7 +8,7 @@
     </h2>
     <%= form_with model: @profile, url: user_profiles_path(@user.id),local: true do |f| %>
     <%= render partial: 'shared/error_messages', locals: { model: f.object } %>
-    
+
     <%# ユーザーのひとこと %>
       <div class="profile-explain">
         <div class="weight-bold-text">
