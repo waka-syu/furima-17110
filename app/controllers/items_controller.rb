@@ -1,10 +1,11 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_purchases, only: [:index, :search]
+  before_action :search_item, only: [:index, :search]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
-    @purchases = Purchase.includes(:item)
   end
 
   def new
@@ -48,9 +49,19 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
-
+  def search
+    @items = @i.result(distinct: true).order(created_at: "DESC").includes(:user)
+  end
 
   private
+
+  def search_item
+    @i = Item.ransack(params[:q])
+  end
+
+  def set_purchases
+    @purchases = Purchase.includes(:item)
+  end
 
   def set_item
     @item = Item.find(params[:id])

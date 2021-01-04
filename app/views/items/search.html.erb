@@ -1,0 +1,47 @@
+<%= render "shared/header" %>
+  <%# 商品一覧 %>
+  <div class='item-contents'>
+    <% if @items.present? %>
+    <h2 class='result-true'>該当商品一覧</h2>
+    <ul class='item-lists'>
+      <% @items.each do |item| %>
+      <li class='list'>
+        <%= link_to item_path(item.id) do %>
+        <div class='item-img-content'>
+          <%= image_tag item.image, class: "item-img" %>
+
+          <%# 商品が売れていればsold outを表示 %>
+          <% @purchases.each do |purchase| %>
+            <% if item.id == purchase.item.id %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+            <% end %>
+          <% end %>
+          <%# //商品が売れていればsold outを表示 %>
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= item.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= item.value %>円<br><%= item.fee.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        <div class='item-user'>
+            <%= link_to item.user.nickname, user_path(item.user.id) %>
+        </div> 
+      </li>
+      <% end %>
+    </ul>
+    <% else %>
+      <h3 class='result-false'>一致する商品はありません</h3>
+    <% end %>
+  </div>
+  <%# /商品一覧 %>
+<%= render "shared/footer" %>
