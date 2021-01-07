@@ -1,0 +1,12 @@
+.result-true {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.result-false {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: red;
+}
