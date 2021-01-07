@@ -20,25 +20,25 @@ RSpec.describe Profile, type: :model do
       it 'prefecture_idが空だと登録できない' do
         @profile.prefecture_id = nil
         @profile.valid?
-        expect(@profile.errors.full_messages).to include("Prefecture can't be blank", "Prefecture is not a number")
+        expect(@profile.errors.full_messages).to include("登録地域を入力してください", "登録地域は数値で入力してください")
       end
 
       it 'prefecture_idの値が１では登録できない' do
         @profile.prefecture_id = 1
         @profile.valid?
-        expect(@profile.errors.full_messages).to include("Prefecture must be other than 1")
+        expect(@profile.errors.full_messages).to include("登録地域は1以外の値にしてください")
       end
 
       it 'gender_idが空だと登録できない' do
         @profile.gender_id = nil
         @profile.valid?
-        expect(@profile.errors.full_messages).to include("Gender can't be blank", "Gender is not a number")
+        expect(@profile.errors.full_messages).to include("性別を入力してください", "性別は数値で入力してください")
       end
 
       it 'gender_idの値が１では登録できない' do
         @profile.gender_id = 1
         @profile.valid?
-        expect(@profile.errors.full_messages).to include("Gender must be other than 1")
+        expect(@profile.errors.full_messages).to include("性別は1以外の値にしてください")
       end
     end
   end
